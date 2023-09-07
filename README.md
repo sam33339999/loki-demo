@@ -2,6 +2,14 @@
 
 > Grafana Loki 是 Prometheus 系列的類似工具，但是面向的是 log 相關功能，透過 Grafana 的介面，使得 log 監控可視化展示，並且可以查詢。
 
+
+## docker-compose 的相關資源：
+- [Loki](https://grafana.com/oss/loki/): 下方有說明
+- [promtail](https://grafana.com/docs/loki/latest/clients/promtail/): 下方有說明
+- [Grafana](https://grafana.com/docs/grafana/latest/): 下方有說明
+- [Prometheus](https://prometheus.io/): 監控軟體
+- [Minio](https://min.io/): object-storage 工具，可以模擬 S3 的存儲。
+
 ## 相關流程：
 
 - Loki: 是一個 Server 可以使 log 導入、分析、查詢的一個 api server
