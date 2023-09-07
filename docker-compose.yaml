@@ -1,0 +1,67 @@
+version: "3"
+
+services:
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin # 設定帳號
+      - GF_SECURITY_ADMIN_PASSWORD=admin123 # 設定密碼
+      - GF_USERS_ALLOW_SIGN_UP=false # 不允許註冊
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    entrypoint: 
+      - /run.sh
+
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   ports:
+  #     - 9090:9090
+  #   volumes:
+  #     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  #     - ./prometheus/data:/prometheus
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki-config.yaml:/etc/loki/config.yaml
+
+  # promtail:
+  #   image: grafana/promtail:2.0.0
+  #   # volumes:
+  #   #   - /var/log:/var/log
+  #   command: -config.file=/etc/promtail/config.yml
+    
+  # 模擬 S3 服務使用，使 Loki 有地方可以儲存物件資訊
+  minio:
+    image: minio/minio
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /data/loki-data && \
+        mkdir -p /data/loki-ruler && \
+        minio server /data
+    environment:
+      - MINIO_ROOT_USER=loki
+      - MINIO_ROOT_PASSWORD=supersecret
+      - MINIO_PROMETHEUS_AUTH_TYPE=public
+      - MINIO_UPDATE=off
+    ports:
+      - 9000
+    volumes:
+      - ./.data/minio:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 15s
+      timeout: 20s
+      retries: 5
