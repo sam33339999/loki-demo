@@ -1,6 +1,10 @@
 {
     "cSpell.words": [
         "alertmanager",
+        "bucketnames",
+        "forcepathstyle",
+        "kvstore",
+        "memberlist",
         "Minio",
         "promtail"
     ]

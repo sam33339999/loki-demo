@@ -17,17 +17,29 @@ common:
   path_prefix: /loki
   replication_factor: 1
   storage:
-    s3:
-      endpoint: minio:9000
-      insecure: true
-      bucketnames: loki-data
-      access_key_id: loki
-      secret_access_key: supersecret
-      s3forcepathstyle: true
+    # s3:
+    #   endpoint: minio:9000
+    #   insecure: true
+    #   bucketnames: loki-data
+    #   access_key_id: loki
+    #   secret_access_key: supersecret
+    #   s3forcepathstyle: true
+    filesystem:
+      chunks_directory: /tmp/loki/chunks
+      rules_directory: /tmp/loki/rules
   ring:
     kvstore:
       store: memberlist
 ruler:
   storage:
-    s3:
-      bucketnames: loki-ruler
+    # s3:
+    #   bucketnames: loki-ruler
+    local:
+      directory: /monitor/loki/rules # Loki 告警規則存儲路徑
+    rule_path: /monitor/loki/rules-temp # 為 rules 臨時規則存儲目錄
+    alertmanager_url: http://alertmanager:9093
+    ring:
+      kvstore:
+        store: memberlist
+    enable_api: true
+    enable_alertmanager_v2: true

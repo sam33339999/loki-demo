@@ -34,12 +34,29 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - ./loki-config.yaml:/etc/loki/config.yaml
+      - ./loki/rules:/loki/rules/
 
-  # promtail:
-  #   image: grafana/promtail:2.0.0
-  #   # volumes:
-  #   #   - /var/log:/var/log
-  #   command: -config.file=/etc/promtail/config.yml
+  promtail:
+    image: grafana/promtail:2.0.0
+    volumes:
+      # - /var/log:/var/log
+      - ./loki-fake-log:/var/log
+    command: -config.file=/etc/promtail/config.yml
+
+  log-generator:
+    image: mingrammer/flog
+    platform: linux/amd64
+    command:
+      - --loop
+      - --format=json
+      - --number=10 # number of log lines to generate per second
+      - --delay=100ms # delay between log lines
+      - --output=/var/log/generated-logs.txt
+      - --overwrite
+      - --type=log
+    volumes:
+      - ./loki-fake-log/:/var/log/
+
 
   alertmanager:
     image: prom/alertmanager:latest
