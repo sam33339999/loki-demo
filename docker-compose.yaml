@@ -51,12 +51,11 @@ services:
       - --format=json
       - --number=10 # number of log lines to generate per second
       - --delay=100ms # delay between log lines
-      - --output=/var/log/generated-logs.txt
+      - --output=/var/log/generated-logs.log
       - --overwrite
       - --type=log
     volumes:
       - ./loki-fake-log/:/var/log/
-
 
   alertmanager:
     image: prom/alertmanager:latest
