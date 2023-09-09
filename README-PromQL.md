@@ -8,7 +8,7 @@
 
 ## PromQL查詢結果主要有三種類型：
 - 瞬時數據 (Instant vector): 包含一組時序，每個時序只有一個點，如 http_requests_total
-- 區間數據 (Range vector): 包含一組時序，北個時序有多個點。如 http_requests_total[5m]
+- 區間數據 (Range vector): 包含一組時序，每個時序有多個點。如 http_requests_total[5m]
 - 純量數據 (Scalar): 純量只有一個數字，沒有時序。如 count(http_requests_total)
 
 ## 語法：
@@ -16,17 +16,17 @@
 - 比較運算符: `==`, `!=`, `>`, `>=`, `<`, `<=`
 - 邏輯運算符: `and`(交集), `or`(聯集), `unless`(差集)
 - 聚合運算符:
-    `sum` (calculate sum over dimensions)                               # 范围内求和
-    `min` (select minimum over dimensions)                              # 范围内求最小值
-    `max` (select maximum over dimensions)                              # 范围内求最大值
-    `avg` (calculate the average over dimensions)                       # 范围内求最大值
-    `stddev` (calculate population standard deviation over dimensions)  # 计算标准偏差
-    `stdvar` (calculate population standard variance over dimensions)   # 计算标准方差
-    `count` (count number of elements in the vector)                    # 计算向量中的元素数量
-    `count_values` (count number of elements with the same value)       # 计算向量中相同元素的数量
-    `bottomk` (smallest k elements by sample value)                     # 样本中最小的元素值
-    `topk` (largest k elements by sample value)                         # 样本中最大的元素值
-    `quantile` (calculate φ-quantile (0 ≤ φ ≤ 1) over dimensions)      # 计算 0-1 之间的百分比数量的样本的最大值
+    - `sum` (calculate sum over dimensions)                               # 范围内求和
+    - `min` (select minimum over dimensions)                              # 范围内求最小值
+    - `max` (select maximum over dimensions)                              # 范围内求最大值
+    - `avg` (calculate the average over dimensions)                       # 范围内求最大值
+    - `stddev` (calculate population standard deviation over dimensions)  # 计算标准偏差
+    - `stdvar` (calculate population standard variance over dimensions)   # 计算标准方差
+    - `count` (count number of elements in the vector)                    # 计算向量中的元素数量
+    - `count_values` (count number of elements with the same value)       # 计算向量中相同元素的数量
+    - `bottomk` (smallest k elements by sample value)                     # 样本中最小的元素值
+    - `topk` (largest k elements by sample value)                         # 样本中最大的元素值
+    - `quantile` (calculate φ-quantile (0 ≤ φ ≤ 1) over dimensions)      # 计算 0-1 之间的百分比数量的样本的最大值
 
 > 優先級: `^` > `(* / %)` > `(+ -)` > `(== != >= > <= <)` > `(and unless)` > `or`
 
@@ -45,7 +45,7 @@
 - y 年
 
 ## (進階語法)偏移量修改器：
-> 偏移量修改允許改變查詢中各個即時和範圍向量的時間偏移，簡單說就是可以查偏移時間的部分，預設是全查
+> 偏移量修改允許改變查詢中各個即時和範圍向量的時間偏移，簡單說就是可以查偏移時間的部分，預設是全查<br />
 如同下方 <a href="#search_5_min_ago">範圍查詢，過去 5 分鐘</a>
 
 
