@@ -49,7 +49,7 @@ services:
     command:
       - --loop
       - --format=json
-      - --number=10 # number of log lines to generate per second
+      - --number=1 # number of log lines to generate per second
       - --delay=100ms # delay between log lines
       - --output=/var/log/generated-logs.log
       - --overwrite

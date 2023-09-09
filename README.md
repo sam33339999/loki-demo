@@ -10,6 +10,7 @@
 - [Prometheus](https://prometheus.io/): 監控軟體
 - [Minio](https://min.io/): object-storage 工具，可以模擬 S3 的存儲。
 - [alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/): 告警 -> to any platform. like: `LINE`, `Discord`, `Slack`, `Email`, etc.
+- [mingrammer/flog](https://github.com/mingrammer/flog): 假 log 的產生器。
 ## 相關流程：
 
 - Loki: 是一個 Server 可以使 log 導入、分析、查詢的一個 api server
