@@ -1,6 +1,7 @@
 # Prometheus Query Language.(PromQL)
 
 - [loki-query: PromQL](https://grafana.com/docs/loki/latest/query/)
+- [PromQL 基本使用](https://zhuanlan.zhihu.com/p/504674961)
 
 > PromQL 是 Prometheus 自己開發的數據查詢 DSL 語言，語言表達線非常豐富，內置函式很多，
 日常數據可視化或是 rule 告警都會使用到他。
@@ -16,17 +17,17 @@
 - 比較運算符: `==`, `!=`, `>`, `>=`, `<`, `<=`
 - 邏輯運算符: `and`(交集), `or`(聯集), `unless`(差集)
 - 聚合運算符:
-    - `sum` (calculate sum over dimensions)                               # 范围内求和
-    - `min` (select minimum over dimensions)                              # 范围内求最小值
-    - `max` (select maximum over dimensions)                              # 范围内求最大值
-    - `avg` (calculate the average over dimensions)                       # 范围内求最大值
-    - `stddev` (calculate population standard deviation over dimensions)  # 计算标准偏差
-    - `stdvar` (calculate population standard variance over dimensions)   # 计算标准方差
-    - `count` (count number of elements in the vector)                    # 计算向量中的元素数量
-    - `count_values` (count number of elements with the same value)       # 计算向量中相同元素的数量
-    - `bottomk` (smallest k elements by sample value)                     # 样本中最小的元素值
-    - `topk` (largest k elements by sample value)                         # 样本中最大的元素值
-    - `quantile` (calculate φ-quantile (0 ≤ φ ≤ 1) over dimensions)      # 计算 0-1 之间的百分比数量的样本的最大值
+    - `sum` (calculate sum over dimensions)                               # 範圍內求和
+    - `min` (select minimum over dimensions)                              # 範圍內求最小值
+    - `max` (select maximum over dimensions)                              # 範圍內求最大值
+    - `avg` (calculate the average over dimensions)                       # 範圍內求最大值
+    - `stddev` (calculate population standard deviation over dimensions)  # 計算標準偏差
+    - `stdvar` (calculate population standard variance over dimensions)   # 計算標準方差
+    - `count` (count number of elements in the vector)                    # 計算向量中的元素数量
+    - `count_values` (count number of elements with the same value)       # 計算向量中相同元素的数量
+    - `bottomk` (smallest k elements by sample value)                     # 樣本中最小的元素值
+    - `topk` (largest k elements by sample value)                         # 樣本中最大的元素值
+    - `quantile` (calculate φ-quantile (0 ≤ φ ≤ 1) over dimensions)       # 計算 0-1 之間的百分比數量的樣本的最大值
 
 > 優先級: `^` > `(* / %)` > `(+ -)` > `(== != >= > <= <)` > `(and unless)` > `or`
 
